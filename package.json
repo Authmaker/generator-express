@@ -1,13 +1,13 @@
 {
   "name": "generator-stonecircle-express",
   "version": "0.0.0",
-  "description": "Yeoman generator",
-  "license": "MIT",
+  "description": "Yeoman generator for Stone Circle express apps",
+  "license": "UNLICENCED",
   "main": "app/index.js",
-  "repository": "mansona/generator-stonecircle-express",
+  "repository": "stonecircle/generator-stonecircle-express",
   "author": {
     "name": "Chris Manson",
-    "email": "",
+    "email": "chris@manson.ie",
     "url": "https://github.com/mansona"
   },
   "scripts": {

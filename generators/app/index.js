@@ -4,7 +4,7 @@ var chalk = require('chalk');
 var yosay = require('yosay');
 
 module.exports = yeoman.generators.Base.extend({
-  prompting: function () {
+  prompting: function() {
     var done = this.async();
 
     // Have Yeoman greet the user.
@@ -12,15 +12,18 @@ module.exports = yeoman.generators.Base.extend({
       'Welcome to the remarkable ' + chalk.red('StonecircleExpress') + ' generator!'
     ));
 
-    var prompts = [{
-      type: 'confirm',
-      name: 'someOption',
-      message: 'Would you like to enable this option?',
-      default: true
-    }];
+    var prompts = [
+      {
+        type: 'confirm',
+        name: 'someOption',
+        message: 'Would you like to enable this option?',
+        default: true,
+      },
+    ];
 
-    this.prompt(prompts, function (props) {
+    this.prompt(prompts, function(props) {
       this.props = props;
+
       // To access props later use this.props.someOption;
 
       done();
@@ -28,30 +31,24 @@ module.exports = yeoman.generators.Base.extend({
   },
 
   writing: {
-    app: function () {
+    app: function() {
       this.fs.copy(
         this.templatePath('_package.json'),
         this.destinationPath('package.json')
       );
-      this.fs.copy(
-        this.templatePath('_bower.json'),
-        this.destinationPath('bower.json')
-      );
     },
 
-    projectfiles: function () {
-      this.fs.copy(
-        this.templatePath('editorconfig'),
-        this.destinationPath('.editorconfig')
-      );
-      this.fs.copy(
-        this.templatePath('jshintrc'),
-        this.destinationPath('.jshintrc')
-      );
-    }
+    projectfiles: function() {
+      ['editorconfig', 'jshintrc', 'jsbeautifyrc', 'jscsrc', 'travis.yml'].forEach(file => {
+        this.fs.copy(
+          this.templatePath(file),
+          this.destinationPath(`.${file}`)
+        );
+      });
+    },
   },
 
-  install: function () {
+  install: function() {
     this.installDependencies();
-  }
+  },
 });
