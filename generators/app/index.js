@@ -39,16 +39,35 @@ module.exports = yeoman.generators.Base.extend({
     },
 
     projectfiles: function() {
-      ['editorconfig', 'jshintrc', 'jsbeautifyrc', 'jscsrc', 'travis.yml'].forEach(file => {
+      //dot files
+      ['editorconfig', 'jshintrc', 'jsbeautifyrc', 'jscsrc', 'travis.yml', 'gitignore'].forEach(file => {
         this.fs.copy(
           this.templatePath(file),
           this.destinationPath(`.${file}`)
         );
       });
+
+      //javascript files
+      this.fs.copy(
+        this.templatePath('app/**'),
+        this.destinationPath('./')
+      );
     },
   },
 
   install: function() {
     this.installDependencies();
+  },
+
+  end: function() {
+    this.spawnCommand('git', ['init'])
+      .on('exit', () => {
+        this.spawnCommand('git', ['add', '--all'])
+          .on('exit', () => {
+            this.spawnCommand('git', ['commit', '-m', '"initial commit from generator"']);
+          });
+      });
+
+    console.log(yosay('I believe we\'re done here.'));
   },
 });
