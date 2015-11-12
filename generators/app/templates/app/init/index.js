@@ -1,10 +1,10 @@
 var initialised = false;
 
 module.exports = function(nconf) {
-    if (initialised) {
-        return;
-    }
+  if (initialised) {
+    return;
+  }
 
-    require('./mongodb')(nconf);
-    initialised = true;
+  require('./mongodb')(nconf);
+  initialised = true;
 };

@@ -9,18 +9,18 @@ var settings = require('./settings');
 winston.remove(winston.transports.Console);
 
 var winstonOptions = {
-    colorize: true,
-    timestamp: true,
-    handleExceptions: true,
-    prettyPrint: true
+  colorize: true,
+  timestamp: true,
+  handleExceptions: true,
+  prettyPrint: true,
 };
 
-if(process.env.LOG_LEVEL){
-    winstonOptions.level = process.env.LOG_LEVEL;
-} else if(process.env.NODE_ENV === 'development' || process.env.NODE_ENV === 'test'){
-    winstonOptions.level = "debug";
+if (process.env.LOG_LEVEL) {
+  winstonOptions.level = process.env.LOG_LEVEL;
+} else if (process.env.NODE_ENV === 'development' || process.env.NODE_ENV === 'test') {
+  winstonOptions.level = 'debug';
 } else {
-    winstonOptions.level = "info";
+  winstonOptions.level = 'info';
 }
 
 winston.add(winston.transports.Console, winstonOptions);
@@ -30,19 +30,17 @@ require('./init')(nconf);
 
 var app = express();
 
-if(settings.server.useCors){
-    app.use(cors());
+if (settings.server.useCors) {
+  app.use(cors());
 }
 
 var appRoutes = require('./server');
 
 appRoutes(app);
 
-var server = app.listen(settings.server.run_port, function () {
-
+var server = app.listen(settings.server.runPort, function() {
   winston.info('Server listening', {
-      host: server.address().address,
-      port: server.address().port
+    host: server.address().address,
+    port: server.address().port,
   });
-
 });
