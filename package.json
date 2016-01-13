@@ -1,6 +1,6 @@
 {
   "name": "@stonecircle/generator-express",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Yeoman generator for Stone Circle express apps",
   "license": "UNLICENCED",
   "main": "app/index.js",
