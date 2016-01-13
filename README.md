@@ -19,10 +19,10 @@ npm install -g yo
 We will soon be updating this package to use npm private modules but for now install using the following
 
 ```bash
-npm install -g stonecircle/generator-stonecircle-express
+npm install -g @stonecircle/generator-express
 ```
 
-Finally, initiate the generator:
+Create the folder that you want to be a project, cd into that folder and run the following: 
 
 ```bash
 yo stonecircle-express
