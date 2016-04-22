@@ -1,0 +1,4 @@
+{
+  "test": "NODE_ENV=test mocha --recursive --reporter spec",
+  "test-watch": "npm run test -- -w --reporter min"
+}

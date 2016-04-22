@@ -1,0 +1,52 @@
+var expect = require('chai').expect;
+var request = require('supertest');
+
+var routeFile = rootRequire('./routes/endpoint');
+<% if(fixtureName) { %>var fixture = rootRequire('test/fixtures/<%= fixtureName %>');
+<% } %>
+describe('<%= routeName %> api test', function() {
+
+  before(function() {
+    //function type
+    routeFile(global.app);
+
+    ////autoroute type
+    //autoroute(global.app, {
+    //    throwErrors: true,
+    //    routeFile: rootPath('routes/api/chats.js')
+    //});
+  });
+  <% if(fixtureName) { %>
+  beforeEach(function() {
+    return fixture.init();
+  });
+
+  afterEach(function() {
+    return fixture.reset();
+  });
+  <% } %>
+  it('should get something from the endpoint', function(done) {
+    request(global.app)
+      .get('/endpoint')
+      .expect(200)
+      .end(done);
+  });
+
+  it('should get something else from the endpoint with a header', function(done) {
+    request(global.app)
+      .get('/endpoint')
+      .set('some-header', 'value value value')
+      .expect(200)
+      .end(done);
+  });
+
+  it('should return an array of things', function(done) {
+    request(global.app)
+      .get('/endpoint')
+      .expect(function(res) {
+        expect(res.body).to.have.deep.property('things[0]');
+        expect(res.body).to.have.deep.property('things.length', 1);
+      })
+      .end(done);
+  });
+});
