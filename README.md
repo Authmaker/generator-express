@@ -25,7 +25,7 @@ npm install -g @stonecircle/generator-express
 Create the folder that you want to be a project, cd into that folder and run the following: 
 
 ```bash
-yo stonecircle-express
+yo @stonecircle/express
 ```
 
 ## License
