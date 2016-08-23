@@ -1,11 +1,11 @@
-var autorouteJson = require('express-autoroute-json');
-var models = require('../../../models');
+const autorouteJson = require('express-autoroute-json');
+const models = require('../../../models');
 
 module.exports.autoroute = autorouteJson({
   model: models.amenity,
-  resource: 'example', //this will be pluralised in the routes
+  resource: 'example', // this will be pluralised in the routes
 
-  //default CRUD
+  // default CRUD
   find: {},
   create: {},
   update: {},

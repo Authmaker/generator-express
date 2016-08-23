@@ -15,8 +15,8 @@ module.exports = yeoman.generators.Base.extend({
     var prompts = [
       {
         type: 'confirm',
-        name: 'someOption',
-        message: 'Would you like to enable this option?',
+        name: 'lovelyDay',
+        message: 'Are you having a lovely day?',
         default: true,
       },
     ];
@@ -24,8 +24,13 @@ module.exports = yeoman.generators.Base.extend({
     this.prompt(prompts, function(props) {
       this.props = props;
 
-      // To access props later use this.props.someOption;
+      if (this.props.lovelyDay) {
+        this.log(yosay('Horray! 🎉 Let\'s see if we can\'t make it better by making some awesome software'));
+      } else {
+        this.log(yosay('Oh well that\'s an aweful shame 😞, let\'s see if we can\'t make some awesome software to cheer you up!'));
+      }
 
+      // To access props later use this.props.someOption;
       done();
     }.bind(this));
   },
@@ -40,7 +45,7 @@ module.exports = yeoman.generators.Base.extend({
 
     projectfiles: function() {
       //dot files
-      ['editorconfig', 'jshintrc', 'jsbeautifyrc', 'jscsrc', 'travis.yml', 'gitignore'].forEach(file => {
+      ['editorconfig', 'eslintrc.json', 'travis.yml', 'gitignore'].forEach(file => {
         this.fs.copy(
           this.templatePath(file),
           this.destinationPath(`.${file}`)

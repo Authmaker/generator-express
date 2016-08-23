@@ -1,14 +1,14 @@
-var cors = require('cors');
-var express = require('express');
-var winston = require('winston');
-var nconf = require('nconf');
+const cors = require('cors');
+const express = require('express');
+const winston = require('winston');
+const nconf = require('nconf');
 
-var settings = require('./settings');
+const settings = require('./settings');
 
 //remove it so to add it with my settings
 winston.remove(winston.transports.Console);
 
-var winstonOptions = {
+const winstonOptions = {
   colorize: true,
   timestamp: true,
   handleExceptions: true,
@@ -25,20 +25,20 @@ if (process.env.LOG_LEVEL) {
 
 winston.add(winston.transports.Console, winstonOptions);
 
-//Initialisations
+// Initialisations
 require('./init')(nconf);
 
-var app = express();
+const app = express();
 
 if (settings.server.useCors) {
   app.use(cors());
 }
 
-var appRoutes = require('./server');
+const appRoutes = require('./server');
 
 appRoutes(app);
 
-var server = app.listen(settings.server.runPort, function() {
+const server = app.listen(settings.server.runPort, function() {
   winston.info('Server listening', {
     host: server.address().address,
     port: server.address().port,

@@ -1,4 +1,4 @@
-var initialised = false;
+const initialised = false;
 
 module.exports = function(nconf) {
   if (initialised) {

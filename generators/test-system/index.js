@@ -8,7 +8,7 @@ _.mixin({
       return comparator ? comparator(obj[key], key) : key;
     });
 
-    return _.object(keys, _.map(keys, function(key) {
+    return _.fromPairs(keys, _.map(keys, function(key) {
       return obj[key];
     }));
   },

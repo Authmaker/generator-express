@@ -12,7 +12,7 @@
     "authmaker-verify-express": "^2.2.0",
     "body-parser": "^1.14.1",
     "cors": "^2.5.3",
-    "express-autoroute-json": "^3.0.0-alpha2.10",
+    "express-autoroute-json": "^3.0.0",
     "express-autoroute": "^1.2.1",
     "express-session": "^1.10.4",
     "express": "^4.12.3",
@@ -23,5 +23,12 @@
     "nconf": "^0.8.2",
     "q": "^1.2.0",
     "winston": "^2.0.0"
+  },
+  "devDependencies": {
+    "eslint-config-airbnb": "^10.0.1",
+    "eslint-plugin-import": "^1.13.0",
+    "eslint-plugin-jsx-a11y": "^2.1.0",
+    "eslint-plugin-react": "^6.1.1",
+    "eslint": "^3.3.1"
   }
 }
