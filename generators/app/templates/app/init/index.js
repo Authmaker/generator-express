@@ -1,6 +1,6 @@
-const initialised = false;
+let initialised = false;
 
-module.exports = function(nconf) {
+module.exports = function initMongodb(nconf) {
   if (initialised) {
     return;
   }
