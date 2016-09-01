@@ -1,7 +1,9 @@
 {
-  "mocha": "^2.2.5",
-  "supertest": "^1.0.1",
-  "chai": "^3.0.0",
-  "q": "^1.4.1",
-  "sinon": "^1.15.4"
+  "chai": "^3.5.0",
+  "codeclimate-test-reporter": "^0.3.3",
+  "istanbul": "^0.4.4",
+  "mocha": "^3.0.2",
+  "sinon": "^1.17.5",
+  "supertest": "^2.0.0",
+  "timekeeper": "^0.1.1"
 }

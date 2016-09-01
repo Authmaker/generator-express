@@ -17,7 +17,7 @@ describe('stonecircle express:app', function() {
     assert.file([
       'package.json',
       '.editorconfig',
-      '.jshintrc',
+      '.eslintrc.json',
     ]);
   });
 });

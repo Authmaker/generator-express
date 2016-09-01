@@ -1,16 +1,29 @@
-var http = require('http');
+const http = require('http');
+const express = require('express');
+const authmakerVerifyExpress = require('authmaker-verify-express');
+const Q = require('q');
+const nconf = require('nconf');
 
-var dbConnectionFunction = require('your_db').connect;
+Q.longStackSupport = true;
 
-var httpServer;
+nconf.defaults({
+  mongo: {
+    authmaker: {
+      db: 'your-test-database-here',
+      host: 'localhost',
+      port: 27017,
+    },
+  },
+});
 
 before(function() {
-    global.app = rootRequire('app/express');
-    //create http server
-    httpServer = http.createServer(global.app).listen(56773);
-    dbConnectionFunction(config);
+  global.app = express();
+
+  // create http server
+  global.httpServer = http.createServer(global.app).listen(56773);
+  authmakerVerifyExpress.connectMongo(nconf);
 });
 
 after(function(done) {
-    httpServer.close(done);
+  global.httpServer.close(done);
 });

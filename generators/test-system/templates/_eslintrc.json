@@ -1,0 +1,20 @@
+{
+    "env": {
+        "node": true,
+        "mocha": true
+    },
+
+    "globals": {
+      "rootRequire": true
+    },
+
+    "extends": "airbnb",
+    "rules": {
+      "func-names": [0],
+      "import/no-extraneous-dependencies": [0],
+      "new-cap": [2 , { "capIsNewExceptions": ["Q", "ObjectId"] }],
+      "no-underscore-dangle": [2, { "allow": ["_id"] }],
+      "no-unused-expressions": [0],
+      "prefer-arrow-callback": [0]
+    }
+}
