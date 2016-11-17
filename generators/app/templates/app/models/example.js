@@ -1,11 +1,9 @@
-var mongoose = require('mongoose');
-var modelName = 'Example';
+const mongoose = require('mongoose');
 
-var schema = new mongoose.Schema({});
+const schema = new mongoose.Schema({
+  name: String,
+  time: Date,
+});
 
-//protect against re-defining
-if (mongoose.modelNames().indexOf(modelName) !== -1) {
-  module.exports.modelObject = mongoose.model(modelName);
-} else {
-  module.exports.modelObject = mongoose.model(modelName, schema);
-}
+module.exports = schema;
+module.exports.modelName = 'Example';
