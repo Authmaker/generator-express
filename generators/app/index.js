@@ -1,17 +1,17 @@
-var yeoman = require('yeoman-generator');
-var chalk = require('chalk');
-var yosay = require('yosay');
+const yeoman = require('yeoman-generator');
+const chalk = require('chalk');
+const yosay = require('yosay');
 
 module.exports = yeoman.generators.Base.extend({
-  prompting: function() {
-    var done = this.async();
+  prompting() {
+    const done = this.async();
 
     // Have Yeoman greet the user.
     this.log(yosay(
-      'Welcome to the remarkable ' + chalk.red('StonecircleExpress') + ' generator!'
+      `Welcome to the remarkable ${chalk.red('StonecircleExpress')} generator!`
     ));
 
-    var prompts = [
+    const prompts = [
       {
         type: 'confirm',
         name: 'lovelyDay',
@@ -20,30 +20,32 @@ module.exports = yeoman.generators.Base.extend({
       },
     ];
 
-    this.prompt(prompts, function(props) {
+    this.prompt(prompts, props => {
       this.props = props;
 
       if (this.props.lovelyDay) {
+        // eslint-disable-next-line max-len
         this.log(yosay('Horray! 🎉 Let\'s see if we can\'t make it better by making some awesome software'));
       } else {
+        // eslint-disable-next-line max-len
         this.log(yosay('Oh well that\'s an aweful shame 😞, let\'s see if we can\'t make some awesome software to cheer you up!'));
       }
 
       // To access props later use this.props.someOption;
       done();
-    }.bind(this));
+    });
   },
 
   writing: {
-    app: function() {
+    app() {
       this.fs.copy(
         this.templatePath('_package.json'),
         this.destinationPath('package.json')
       );
     },
 
-    projectfiles: function() {
-      //dot files
+    projectfiles() {
+      // dot files
       ['editorconfig', 'eslintrc.json', 'travis.yml', 'gitignore'].forEach(file => {
         this.fs.copy(
           this.templatePath(file),
@@ -51,7 +53,7 @@ module.exports = yeoman.generators.Base.extend({
         );
       });
 
-      //javascript files
+      // javascript files
       this.fs.copy(
         this.templatePath('app/**'),
         this.destinationPath('./')
@@ -59,11 +61,11 @@ module.exports = yeoman.generators.Base.extend({
     },
   },
 
-  install: function() {
+  install() {
     this.installDependencies();
   },
 
-  end: function() {
+  end() {
     this.spawnCommand('git', ['init'])
       .on('exit', () => {
         this.spawnCommand('git', ['add', '--all'])
@@ -72,6 +74,6 @@ module.exports = yeoman.generators.Base.extend({
           });
       });
 
-    console.log(yosay('I believe we\'re done here.'));
+    this.log(yosay('I believe we\'re done here.'));
   },
 });

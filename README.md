@@ -22,11 +22,29 @@ We will soon be updating this package to use npm private modules but for now ins
 npm install -g @stonecircle/generator-express
 ```
 
-Create the folder that you want to be a project, cd into that folder and run the following: 
+Create the folder that you want to be a project, cd into that folder and run the following:
 
 ```bash
 yo @stonecircle/express
 ```
+
+### Available generators
+
+The default generator will get you started with a boilerplate application. Once you have that application up and running you can use some of the following commands to add key features
+
+#### Test System
+
+*to be documented*
+
+#### Background Tasks
+
+```bash
+yo @stonecircle/express:background-tasks
+```
+
+The background tasks system uses [Kue](https://github.com/Automattic/kue) and allows you to have a new file per each job type available in your system.
+
+You will also be asked if you want to add a cron system which will use [node-cron](https://github.com/kelektiv/node-cron). This is intended to allow you to create Kue tasks at regular intervals.
 
 ## License
 
