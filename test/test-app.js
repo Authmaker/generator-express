@@ -1,23 +1,31 @@
-'use strict';
+const path = require('path');
+const assert = require('yeoman-assert');
+const helpers = require('yeoman-generator').test;
 
-var path = require('path');
-var assert = require('yeoman-generator').assert;
-var helpers = require('yeoman-generator').test;
-var os = require('os');
+const generatorVersion = require('../package.json').version;
 
-describe('stonecircle express:app', function() {
-  before(function(done) {
+
+describe('stonecircle express:app', () => {
+  before((done) => {
     helpers.run(path.join(__dirname, '../generators/app'))
       .withOptions({ skipInstall: true })
-      .withPrompts({ someOption: true })
+      .withPrompts({ name: 'test-application' })
       .on('end', done);
   });
 
-  it('creates files', function() {
+  it('creates files', () => {
     assert.file([
       'package.json',
       '.editorconfig',
       '.eslintrc.json',
+      '.gitignore',
+      '.travis.yml',
     ]);
+  });
+
+  it('added generator version to package.json', () => {
+    assert.jsonFileContent('package.json', {
+      '@stonecircle/generator-express:version': generatorVersion,
+    });
   });
 });

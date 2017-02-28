@@ -2,6 +2,8 @@ const yeoman = require('yeoman-generator');
 const chalk = require('chalk');
 const yosay = require('yosay');
 
+const generatorVersion = require('../../package.json').version;
+
 module.exports = yeoman.generators.Base.extend({
   prompting() {
     const done = this.async();
@@ -17,6 +19,12 @@ module.exports = yeoman.generators.Base.extend({
         name: 'lovelyDay',
         message: 'Are you having a lovely day?',
         default: true,
+      },
+      {
+        type: 'input',
+        name: 'name',
+        message: 'Your project name',
+        default: this.appname,
       },
     ];
 
@@ -38,9 +46,13 @@ module.exports = yeoman.generators.Base.extend({
 
   writing: {
     app() {
-      this.fs.copy(
+      this.fs.copyTpl(
         this.templatePath('_package.json'),
-        this.destinationPath('package.json')
+        this.destinationPath('package.json'),
+        {
+          name: this.props.name,
+          generatorVersion,
+        }
       );
     },
 

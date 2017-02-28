@@ -60,13 +60,13 @@ module.exports = yeoman.generators.Base.extend({
       // javascript files
       this.fs.copy(
         this.templatePath('jobs/**'),
-        this.destinationPath('./')
+        this.destinationPath('./jobs')
       );
 
       if (this.props.cron) {
         this.fs.copy(
           this.templatePath('cron/**'),
-          this.destinationPath('./')
+          this.destinationPath('./cron')
         );
       }
     },
