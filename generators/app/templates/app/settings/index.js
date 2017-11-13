@@ -8,6 +8,10 @@ if (['production', 'staging', 'test', 'development'].indexOf(process.env.NODE_EN
 
 nconf.file('localOverrides', path.join(__dirname, `${process.env.NODE_ENV}.json`));
 
+if (nconf.get('nconf:file')) {
+  nconf.file('local-file', nconf.get('nconf:file'));
+}
+
 // common options
 nconf.defaults({
   server: {

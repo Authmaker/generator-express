@@ -1,13 +1,13 @@
 {
-  "name": "@stonecircle/generator-express",
+  "name": "@authmaker/generator-express",
   "version": "1.7.0",
-  "description": "Yeoman generator for Stone Circle express apps",
-  "license": "UNLICENCED",
+  "description": "Yeoman generator for Authmaker express apps",
+  "license": "MIT",
   "main": "app/index.js",
-  "repository": "stonecircle/generator-stonecircle-express",
+  "repository": "https://github.com/Authmaker/generator-express",
   "author": {
     "name": "Chris Manson",
-    "email": "chris@manson.ie",
+    "email": "chris@stonecircle.io",
     "url": "https://github.com/mansona"
   },
   "scripts": {
@@ -17,21 +17,26 @@
     "generators"
   ],
   "keywords": [
-    "yeoman-generator"
+    "yeoman-generator",
+    "authmaker",
+    "jsonapi",
+    "json-api",
+    "json:api",
+    "mongoose",
+    "mongodb"
   ],
   "dependencies": {
-    "chalk": "^1.0.0",
+    "chalk": "^2.3.0",
     "lodash": "^4.13.1",
-    "yeoman-assert": "^3.0.0",
+    "mongodb": "^2.2.33",
+    "yeoman-assert": "^3.1.0",
     "yeoman-generator": "^0.19.0",
     "yosay": "^1.0.2"
   },
   "devDependencies": {
-    "eslint-config-airbnb": "^10.0.1",
-    "eslint-plugin-import": "^1.13.0",
-    "eslint-plugin-jsx-a11y": "^2.1.0",
-    "eslint-plugin-react": "^6.1.1",
-    "eslint": "^3.3.1",
-    "mocha": "*"
+    "eslint": "^4.11.0",
+    "eslint-config-airbnb-base": "^12.1.0",
+    "eslint-plugin-import": "^2.8.0",
+    "mocha": "^4.0.1"
   }
 }

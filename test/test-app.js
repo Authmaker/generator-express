@@ -5,7 +5,7 @@ const helpers = require('yeoman-generator').test;
 const generatorVersion = require('../package.json').version;
 
 
-describe('stonecircle express:app', () => {
+describe('authmaker express:app', () => {
   before((done) => {
     helpers.run(path.join(__dirname, '../generators/app'))
       .withOptions({ skipInstall: true })
@@ -25,7 +25,7 @@ describe('stonecircle express:app', () => {
 
   it('added generator version to package.json', () => {
     assert.jsonFileContent('package.json', {
-      '@stonecircle/generator-express:version': generatorVersion,
+      '@authmaker/generator-express:version': generatorVersion,
     });
   });
 });

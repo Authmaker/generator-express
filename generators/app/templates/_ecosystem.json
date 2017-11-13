@@ -1,0 +1,19 @@
+{
+  "apps": [{
+    "name"      : "<%= name %>",
+    "script"    : "app.js",
+    "env_production" : {
+      "NODE_ENV": "production"
+    }
+  }],
+  "deploy": {
+    "production" : {
+      "user" : "",
+      "host" : "",
+      "ref"  : "origin/master",
+      "repo" : "",
+      "path" : "/apps/<%= directory %>",
+      "post-deploy" : "npm install && pm2 startOrRestart ecosystem.json --env production"
+    }
+  }
+}

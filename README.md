@@ -1,4 +1,4 @@
-# generator-stonecircle-express [![Build Status](https://magnum.travis-ci.org/mansona/generator-stonecircle-express.png?branch=master)](https://travis-ci.org/mansona/generator-stonecircle-express)
+# @authmaker/generator-express [![Build Status](https://magnum.travis-ci.org/authmaker/generator.png?branch=master)](https://travis-ci.org/authmaker/generator)
 
 > [Yeoman](http://yeoman.io) generator
 
@@ -19,13 +19,13 @@ npm install -g yo
 We will soon be updating this package to use npm private modules but for now install using the following
 
 ```bash
-npm install -g @stonecircle/generator-express
+npm install -g @authmaker/generator-express
 ```
 
 Create the folder that you want to be a project, cd into that folder and run the following:
 
 ```bash
-yo @stonecircle/express
+yo @authmaker/express
 ```
 
 ### Available generators
@@ -39,7 +39,7 @@ The default generator will get you started with a boilerplate application. Once 
 #### Background Tasks
 
 ```bash
-yo @stonecircle/express:background-tasks
+yo @authmaker/express:background-tasks
 ```
 
 The background tasks system uses [Kue](https://github.com/Automattic/kue) and allows you to have a new file per each job type available in your system.
