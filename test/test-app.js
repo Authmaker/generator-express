@@ -8,7 +8,7 @@ const generatorVersion = require('../package.json').version;
 describe('authmaker express:app', () => {
   before((done) => {
     helpers.run(path.join(__dirname, '../generators/app'))
-      .withOptions({ skipInstall: true })
+      .withOptions({ skipInstall: true, 'skip-db': true })
       .withPrompts({ name: 'test-application' })
       .on('end', done);
   });
