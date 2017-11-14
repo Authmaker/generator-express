@@ -1,4 +1,4 @@
-# @authmaker/generator-express [![Build Status](https://magnum.travis-ci.org/authmaker/generator.png?branch=master)](https://travis-ci.org/authmaker/generator)
+# @authmaker/generator-express [![Build Status](https://travis-ci.org/Authmaker/generator-express.svg?branch=master)](https://travis-ci.org/Authmaker/generator-express)
 
 > [Yeoman](http://yeoman.io) generator
 
