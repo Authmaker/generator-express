@@ -49,7 +49,7 @@ Let's get started by getting a few details about your new project:`));
       }];
 
       if (!this.options['skip-db']) {
-        prompts.push([{
+        const newPrompts = [{
           type: 'input',
           name: 'dbhost',
           message: `What is your Mongo database ${chalk.red('host')}? e.g. on mlab it would be this bit ${chalk.red('ds123456.mlab.com')}:51234/your-database`,
@@ -69,7 +69,9 @@ Let's get started by getting a few details about your new project:`));
           type: 'input',
           name: 'dbpassword',
           message: `And finally: what is your ${chalk.red('super secret')} Mongo database ${chalk.red('password')}?`,
-        }]);
+        }];
+
+        newPrompts.forEach(prompt => prompts.push(prompt));
       }
 
       this.prompt(prompts, (props) => {
