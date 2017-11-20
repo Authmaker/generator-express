@@ -1,12 +1,6 @@
 {
-  "file": "./secure.json",
-
-  "database": {
-    "mongo": {
-      "db": "app-name",
-      "host": "localhost",
-      "port": 27017
-    }
+  "nconf": {
+    "file": "./settings/secure.json"
   },
 
   "redis": {
