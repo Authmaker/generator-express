@@ -6,7 +6,7 @@ const models = [];
 function init(mongoose) {
   fs.readdirSync(path.join(__dirname, '..', 'models'))
     .filter(file => file.indexOf('.') !== 0 && file !== 'index.js')
-    .forEach(file => {
+    .forEach((file) => {
       const requireFilename = file.replace('.js', '');
 
       // eslint-disable-next-line global-require

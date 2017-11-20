@@ -1,5 +1,5 @@
 const autorouteJson = require('express-autoroute-json');
-const models = require('../../../models').models;
+const { models } = require('../../../models');
 
 module.exports.autoroute = autorouteJson({
   model: models.example,
