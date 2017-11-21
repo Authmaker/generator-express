@@ -5,7 +5,7 @@
   "scripts": {
     "deploy-production": "pm2 deploy ecosystem.json production update",
     "setup-production": "pm2 deploy ecosystem.json production setup",
-    "start": "NODE_ENV=development pm2 start app.js --name app-name --watch",
+    "start": "NODE_ENV=development pm2 start app.js --name <%= name %> --watch",
     "test": "NODE_ENV=test mocha --recursive --reporter spec",
     "test-watch": "npm run test -- -w --reporter min"
   },
