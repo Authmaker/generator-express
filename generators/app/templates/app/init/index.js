@@ -25,7 +25,7 @@ module.exports = function initMongodb(nconf) {
     logger: winston,
   })
     .then(() => models.init(mongoose))
-    .then(() => authmakerVerifyExpress.init(nconf))
+    .then(() => authmakerVerifyExpress.connectMongo(nconf))
     .then(() => authmakerCommon.init(nconf))
     .then(() => {
       initialised = true;
