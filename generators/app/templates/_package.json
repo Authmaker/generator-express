@@ -10,8 +10,7 @@
     "test-watch": "npm run test -- -w --reporter min"
   },
   "dependencies": {
-    "@authmaker/common": "^1.2.0",
-    "authmaker-verify-express": "^2.2.0",
+    "authmaker-verify-express": "^3.0.0",
     "body-parser": "^1.14.1",
     "cors": "^2.5.3",
     "express": "^4.12.3",
