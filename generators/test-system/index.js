@@ -3,9 +3,9 @@ const _ = require('lodash');
 
 _.mixin({
   sortKeysBy(obj, comparator) {
-    const keys = _.sortBy(_.keys(obj), (key) => (comparator ? comparator(obj[key], key) : key));
+    const keys = _.sortBy(_.keys(obj), key => (comparator ? comparator(obj[key], key) : key));
 
-    return _.fromPairs(keys, _.map(keys, (key) => obj[key]));
+    return _.fromPairs(keys, _.map(keys, key => obj[key]));
   },
 });
 
@@ -16,17 +16,17 @@ module.exports = yeoman.generators.Base.extend({
 
     this.fs.copy(
       this.templatePath('_eslintrc.json'),
-      this.destinationPath('test/.eslintrc.json')
+      this.destinationPath('test/.eslintrc.json'),
     );
 
     this.fs.copy(
       this.templatePath('_common.js'),
-      this.destinationPath('test/common.js')
+      this.destinationPath('test/common.js'),
     );
 
     this.fs.copy(
       this.templatePath('_index.js'),
-      this.destinationPath('test/index.js')
+      this.destinationPath('test/index.js'),
     );
 
     // add elements to the package.json
@@ -35,14 +35,14 @@ module.exports = yeoman.generators.Base.extend({
     existingJson.scripts = _.assign(
       {},
       existingJson.scripts,
-      this.fs.readJSON(this.templatePath('package/_scripts.json'))
+      this.fs.readJSON(this.templatePath('package/_scripts.json')),
     );
 
 
     existingJson.devDependencies = _.assign(
       {},
       existingJson.devDependencies,
-      this.fs.readJSON(this.templatePath('package/_devDependencies.json'))
+      this.fs.readJSON(this.templatePath('package/_devDependencies.json')),
     );
 
 
