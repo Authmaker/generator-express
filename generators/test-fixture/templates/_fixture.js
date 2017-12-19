@@ -1,21 +1,19 @@
-'use strict';
+const moment = require('moment');
+const mongoose = require('mongoose');
+const Q = require('q');
 
-var moment = require('moment');
-var mongoose = require('mongoose');
-var Q = require('q');
+const models = require('your_db').models;
 
-var models = require('your_db').models;
-
-var usersToCreate = [
+const usersToCreate = [
   {
     _id: mongoose.Types.ObjectId(),
-    username: 'testuser1@bloo.ie',
+    username: 'testuser1@stonecircle.io',
     clientId: 'testChatsFixture',
     date: moment().subtract(1, 'hours').toDate(),
   },
 ];
 
-var chatsToCreate = [
+const chatsToCreate = [
   {
     clientDomain: 'chats.face.com',
     participants: [
@@ -27,33 +25,28 @@ var chatsToCreate = [
 ];
 
 function init() {
-  return models.users.create(usersToCreate).then(function() {
-    return models.chats.create(chatsToCreate);
-  }).then(function() {
-    return models.users.create(usersToCreate);
-  });
+  return models.users.create(usersToCreate)
+    .then(() => models.chats.create(chatsToCreate))
+    .then(() => models.users.create(usersToCreate));
 }
 
 function reset() {
-  //only allow this in test
+  // only allow this in test
   if (process.env.NODE_ENV === 'test') {
-    var collections = mongoose.connection.collections;
+    const collections = mongoose.connection.collections;
 
-    var promises = Object.keys(collections).map(function(collection) {
-      return Q.ninvoke(collections[collection], 'remove');
-    });
+    const promises = Object.keys(collections).map(collection => Q.ninvoke(collections[collection], 'remove'));
 
     return Q.all(promises);
-  } else {
-    var errorMessage = 'Excuse me kind sir, but may I enquire as to why you are currently running reset() in a non test environment? I do propose that it is a beastly thing to do and kindly ask you to refrain from this course of action. Sincerely yours, The Computer.';
-    console.log(errorMessage);
-    console.error(errorMessage);
-    throw new Error(errorMessage);
   }
+  const errorMessage = 'Excuse me kind sir, but may I enquire as to why you are currently running reset() in a non test environment? I do propose that it is a beastly thing to do and kindly ask you to refrain from this course of action. Sincerely yours, The Computer.';
+  console.log(errorMessage);
+  console.error(errorMessage);
+  throw new Error(errorMessage);
 }
 
 module.exports = {
-  init: init,
-  reset: reset,
-  models: models,
+  init,
+  reset,
+  models,
 };

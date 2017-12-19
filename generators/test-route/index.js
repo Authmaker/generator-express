@@ -1,9 +1,7 @@
-'use strict';
-var yeoman = require('yeoman-generator');
+const yeoman = require('yeoman-generator');
 
 module.exports = yeoman.generators.NamedBase.extend({
-  constructor: function () {
-
+  constructor() {
     yeoman.generators.NamedBase.apply(this, arguments);
 
     this.option('fixtureName', {
@@ -15,13 +13,13 @@ module.exports = yeoman.generators.NamedBase.extend({
     this.fixtureName = this.options.fixtureName;
   },
 
-  writing: function () {
+  writing() {
     this.template(
       this.templatePath('_route.js.ejs'),
       this.destinationPath(`test/routes/${this.name}.js`), {
         fixtureName: this.fixtureName,
         routeName: this.name,
-      }
+      },
     );
   },
 });

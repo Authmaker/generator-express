@@ -5,7 +5,8 @@
   },
 
   "globals": {
-    "rootRequire": true
+    "rootRequire": true,
+    "rootPath": true
   },
 
   "extends": "airbnb-base",

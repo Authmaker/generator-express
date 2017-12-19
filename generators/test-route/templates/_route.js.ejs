@@ -25,28 +25,25 @@ describe('<%= routeName %> api test', function() {
     return fixture.reset();
   });
   <% } %>
-  it('should get something from the endpoint', function(done) {
-    request(global.app)
+  it('should get something from the endpoint', function () {
+    return request(global.app)
       .get('/endpoint')
-      .expect(200)
-      .end(done);
+      .expect(200);
   });
 
-  it('should get something else from the endpoint with a header', function(done) {
-    request(global.app)
+  it('should get something else from the endpoint with a header', function () {
+    return request(global.app)
       .get('/endpoint')
       .set('some-header', 'value value value')
-      .expect(200)
-      .end(done);
+      .expect(200);
   });
 
-  it('should return an array of things', function(done) {
-    request(global.app)
+  it('should return an array of things', function () {
+    return request(global.app)
       .get('/endpoint')
-      .expect(function(res) {
+      .expect(function (res) {
         expect(res.body).to.have.deep.property('things[0]');
         expect(res.body).to.have.deep.property('things.length', 1);
-      })
-      .end(done);
+      });
   });
 });

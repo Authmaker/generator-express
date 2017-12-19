@@ -7,8 +7,8 @@ const nconf = require('nconf');
 Q.longStackSupport = true;
 
 nconf.defaults({
-  mongo: {
-    authmaker: {
+  authmaker: {
+    mongo: {
       db: 'your-test-database-here',
       host: 'localhost',
       port: 27017,
@@ -16,14 +16,14 @@ nconf.defaults({
   },
 });
 
-before(function() {
+before(function () {
   global.app = express();
 
   // create http server
   global.httpServer = http.createServer(global.app).listen(56773);
-  authmakerVerifyExpress.connectMongo(nconf);
+  return authmakerVerifyExpress.connectMongo(nconf);
 });
 
-after(function(done) {
+after(function (done) {
   global.httpServer.close(done);
 });
