@@ -1,21 +1,18 @@
-var expect = require('chai').expect;
-var request = require('supertest');
+const { expect } = require('chai');
+const request = require('supertest');
 
-var routeFile = rootRequire('./routes/endpoint');
-<% if(fixtureName) { %>var fixture = rootRequire('test/fixtures/<%= fixtureName %>');
+<% if(fixtureName) { %>
+const fixture = rootRequire('test/fixtures/<%= fixtureName %>');
 <% } %>
+
 describe('<%= routeName %> api test', function() {
-
-  before(function() {
-    //function type
-    routeFile(global.app);
-
-    ////autoroute type
-    //autoroute(global.app, {
-    //    throwErrors: true,
-    //    routeFile: rootPath('routes/api/chats.js')
-    //});
+  before(function () {
+    autoroute(global.app, {
+      throwErrors: true,
+      routeFile: rootPath('./routes/endpoint'),
+    });
   });
+
   <% if(fixtureName) { %>
   beforeEach(function() {
     return fixture.init();
