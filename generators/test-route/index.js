@@ -1,7 +1,7 @@
 const yeoman = require('yeoman-generator');
 
 module.exports = yeoman.generators.NamedBase.extend({
-  constructor() {
+  constructor: function constructor() {
     yeoman.generators.NamedBase.apply(this, arguments);
 
     this.option('fixtureName', {
