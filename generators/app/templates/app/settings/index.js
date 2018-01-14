@@ -16,6 +16,7 @@ if (nconf.get('nconf:file')) {
 nconf.defaults({
   server: {
     runPort: 3000,
+    useCors: true,
   },
 });
 

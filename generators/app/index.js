@@ -2,6 +2,8 @@ const yeoman = require('yeoman-generator');
 const chalk = require('chalk');
 const yosay = require('yosay');
 const { MongoClient } = require('mongodb');
+const crypto = require('crypto');
+const _ = require('lodash');
 
 const generatorVersion = require('../../package.json').version;
 
@@ -107,21 +109,17 @@ Let's get started by getting a few details about your new project:`));
         {
           name: this.props.name.replace(' ', ''),
           generatorVersion,
-        });
-
-      this.fs.copyTpl(
-        this.templatePath('_ecosystem.json'),
-        this.destinationPath('ecosystem.json'),
-        {
-          name: this.props.name,
-          directory: this.props.name.replace(' ', '').replace('/', '-'),
-        });
+        }
+      );
 
       if (!this.options['skip-db']) {
         this.fs.copyTpl(
           this.templatePath('_secure.json'),
           this.destinationPath('settings/secure.json'),
-          this.props);
+          _.assign({}, this.props, {
+            sessionSecret: crypto.randomBytes(128).toString('hex'),
+          })
+        );
       }
     },
 
@@ -130,13 +128,15 @@ Let's get started by getting a few details about your new project:`));
       ['editorconfig', 'eslintrc.json', 'travis.yml', 'gitignore'].forEach((file) => {
         this.fs.copy(
           this.templatePath(file),
-          this.destinationPath(`.${file}`));
+          this.destinationPath(`.${file}`)
+        );
       });
 
       // javascript files
       this.fs.copy(
         this.templatePath('app/**'),
-        this.destinationPath('./'));
+        this.destinationPath('./')
+      );
     },
   },
 
