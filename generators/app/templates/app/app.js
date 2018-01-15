@@ -35,7 +35,7 @@ if (settings.server.useCors) {
 require('./init')(nconf).then(() => {
   appRoutes(app);
 
-  const server = app.listen(settings.server.runPort, () => {
+  const server = app.listen(process.env.PORT || settings.server.runPort, () => {
     winston.info('Server listening', {
       host: server.address().address,
       port: server.address().port,
