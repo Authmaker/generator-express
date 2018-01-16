@@ -1,6 +1,6 @@
 {
   "name": "@authmaker/generator-express",
-  "version": "2.1.3",
+  "version": "2.2.0",
   "description": "Yeoman generator for Authmaker express apps",
   "license": "MIT",
   "main": "app/index.js",
