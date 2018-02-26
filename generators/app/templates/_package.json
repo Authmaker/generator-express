@@ -15,7 +15,6 @@
     "express": "^4.12.3",
     "express-autoroute": "^2.0.0",
     "express-autoroute-json": "^3.0.0",
-    "express-session": "^1.10.4",
     "lodash": "^4.13.1",
     "mongoose": "^4.0.4",
     "mongoose-nconf-connect": "^1.0.1",
