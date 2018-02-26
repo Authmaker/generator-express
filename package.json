@@ -30,8 +30,8 @@
     "lodash": "^4.13.1",
     "mongodb": "^2.2.33",
     "yeoman-assert": "^3.1.0",
-    "yeoman-generator": "^0.19.0",
-    "yosay": "^1.0.2"
+    "yeoman-generator": "^2.0.3",
+    "yosay": "^2.0.1"
   },
   "devDependencies": {
     "eslint": "^4.11.0",

@@ -1,25 +1,25 @@
-const yeoman = require('yeoman-generator');
+const Generator = require('yeoman-generator');
 
-module.exports = yeoman.generators.NamedBase.extend({
-  constructor: function constructor() {
-    yeoman.generators.NamedBase.apply(this, arguments);
+module.exports = class extends Generator {
+  constructor(args, opts) {
+    super(args, opts);
 
-    this.option('fixtureName', {
+    this.argument('name', { type: String, required: true });
+
+    this.argument('fixtureName', {
       desc: 'tells the route test to use this fixture',
-      alias: 'f',
-      type: 'string',
+      type: String,
+      required: false,
     });
-
-    this.fixtureName = this.options.fixtureName;
-  },
+  }
 
   writing() {
-    this.template(
+    this.fs.copyTpl(
       this.templatePath('_route.js.ejs'),
-      this.destinationPath(`test/routes/${this.name}.js`), {
-        fixtureName: this.fixtureName,
-        routeName: this.name,
-      },
+      this.destinationPath(`test/routes/${this.options.name}.js`), {
+        fixtureName: this.options.fixtureName,
+        routeName: this.options.name,
+      }
     );
-  },
-});
+  }
+};
