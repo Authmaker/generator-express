@@ -1,21 +1,13 @@
 {
   "database": {
     "mongo": {
-      "db": "<%= dbname %>",
-      "host": "<%= dbhost %>",
-      "port": <%= dbport %>,
-      "user": "<%= dbuser %>",
-      "password": "<%= dbpassword %>"
+      "connectionString": "<%= connectionString %>"
     }
   },
 
   "authmaker": {
     "mongo": {
-      "db": "<%= dbname %>",
-      "host": "<%= dbhost %>",
-      "port": <%= dbport %>,
-      "user": "<%= dbuser %>",
-      "password": "<%= dbpassword %>"
+      "connectionString": "<%= connectionString %>"
     }
   },
 

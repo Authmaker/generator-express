@@ -1,4 +1,4 @@
-const yeoman = require('yeoman-generator');
+const Generator = require('yeoman-generator');
 const _ = require('lodash');
 
 _.mixin({
@@ -9,11 +9,8 @@ _.mixin({
   },
 });
 
-module.exports = yeoman.generators.Base.extend({
-
+module.exports = class extends Generator {
   createTestFoler() {
-    this.mkdir('test');
-
     this.fs.copy(
       this.templatePath('_eslintrc.json'),
       this.destinationPath('test/.eslintrc.json'),
@@ -47,9 +44,11 @@ module.exports = yeoman.generators.Base.extend({
 
 
     this.fs.writeJSON(this.destinationPath('package.json'), existingJson);
-  },
+  }
 
   install() {
-    this.installDependencies();
-  },
-});
+    this.installDependencies({
+      bower: false,
+    });
+  }
+};

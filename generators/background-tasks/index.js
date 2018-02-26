@@ -1,12 +1,10 @@
 const _ = require('lodash');
 const chalk = require('chalk');
-const yeoman = require('yeoman-generator');
+const Generator = require('yeoman-generator');
 const yosay = require('yosay');
 
-module.exports = yeoman.generators.Base.extend({
+module.exports = class extends Generator {
   prompting() {
-    const done = this.async();
-
     // Have Yeoman greet the user.
     this.log(yosay(
       `I say it's time to make some ${chalk.green('background tasks')}, don't you!?`
@@ -21,7 +19,7 @@ module.exports = yeoman.generators.Base.extend({
       },
     ];
 
-    this.prompt(prompts, props => {
+    return this.prompt(prompts).then(props => {
       this.props = props;
 
       if (this.props.cron) {
@@ -29,52 +27,52 @@ module.exports = yeoman.generators.Base.extend({
       } else {
         this.log(yosay('Not a bother! Maybe next time? 😉'));
       }
-
-      done();
     });
-  },
+  }
 
-  writing: {
-    packageJson() {
-      // add elements to the package.json
-      const existingJson = this.fs.readJSON(this.destinationPath('package.json'));
 
+  packageJson() {
+    // add elements to the package.json
+    const existingJson = this.fs.readJSON(this.destinationPath('package.json'));
+
+    existingJson.dependencies = _.assign(
+      {},
+      existingJson.dependencies,
+      this.fs.readJSON(this.templatePath('package/_dependencies.json'))
+    );
+
+    if (this.props.cron) {
       existingJson.dependencies = _.assign(
         {},
         existingJson.dependencies,
-        this.fs.readJSON(this.templatePath('package/_dependencies.json'))
+        this.fs.readJSON(this.templatePath('package/_dependencies_cron.json'))
       );
+    }
 
-      if (this.props.cron) {
-        existingJson.dependencies = _.assign(
-          {},
-          existingJson.dependencies,
-          this.fs.readJSON(this.templatePath('package/_dependencies_cron.json'))
-        );
-      }
+    this.fs.writeJSON(this.destinationPath('package.json'), existingJson);
+  }
 
-      this.fs.writeJSON(this.destinationPath('package.json'), existingJson);
-    },
+  projectfiles() {
+    // javascript files
+    this.fs.copy(
+      this.templatePath('jobs/**'),
+      this.destinationPath('./jobs')
+    );
 
-    projectfiles() {
-      // javascript files
+    if (this.props.cron) {
       this.fs.copy(
-        this.templatePath('jobs/**'),
-        this.destinationPath('./jobs')
+        this.templatePath('cron/**'),
+        this.destinationPath('./cron')
       );
+    }
+  }
 
-      if (this.props.cron) {
-        this.fs.copy(
-          this.templatePath('cron/**'),
-          this.destinationPath('./cron')
-        );
-      }
-    },
-  },
 
   install() {
-    this.installDependencies();
-  },
+    this.installDependencies({
+      bower: false,
+    });
+  }
 
   end() {
     // eslint-disable-next-line max-len
@@ -102,5 +100,5 @@ initCron(queue);`);
     }
 
     this.log(yosay('Happy coding! 💻 \nI believe we\'re done here.'));
-  },
-});
+  }
+};
