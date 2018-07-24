@@ -2,13 +2,15 @@ const _ = require('lodash');
 const chalk = require('chalk');
 const Generator = require('yeoman-generator');
 const yosay = require('yosay');
+const recast = require('recast');
+const { readFileSync, writeFileSync } = require('fs');
+
+const { builders } = recast.types;
 
 module.exports = class extends Generator {
   prompting() {
     // Have Yeoman greet the user.
-    this.log(yosay(
-      `I say it's time to make some ${chalk.green('background tasks')}, don't you!?`
-    ));
+    this.log(yosay(`I say it's time to make some ${chalk.green('background tasks')}, don't you!?`));
 
     const prompts = [
       {
@@ -19,7 +21,7 @@ module.exports = class extends Generator {
       },
     ];
 
-    return this.prompt(prompts).then(props => {
+    return this.prompt(prompts).then((props) => {
       this.props = props;
 
       if (this.props.cron) {
@@ -59,6 +61,11 @@ module.exports = class extends Generator {
       this.destinationPath('./jobs')
     );
 
+    this.fs.copy(
+      this.templatePath('server/**'),
+      this.destinationPath('./server')
+    );
+
     if (this.props.cron) {
       this.fs.copy(
         this.templatePath('cron/**'),
@@ -75,22 +82,49 @@ module.exports = class extends Generator {
   }
 
   end() {
-    // eslint-disable-next-line max-len
-    this.log(yosay('As we have not yet figured out how to do this for you, please add this to your app.js file:'));
+    const code = readFileSync('./server/index.js');
+    const ast = recast.parse(code);
 
-    this.log(`// Import job initialiser
-const initJobs = require('./jobs');
 
-// Initialise the queue
-const queue = kue.createQueue({
-redis: nconf.get('redis'),
-});
+    recast.visit(ast, {
+      visitProgram(path) {
+        // console.log('lkjsdf', path.value.body);
 
-// Initialise Jobs
-initJobs(queue);
+        const kue = path.value.body.filter(declaration => declaration.type === 'VariableDeclaration').find(declaration => declaration.declarations[0].id.name === 'kueServer');
 
-// Access Kue UI via http://localhost:3000/kue
-app.use('/kue', kue.app);`);
+        if (!kue) {
+          // console.log(builders.variableDeclaration.toString())
+          ast.program.body.unshift(builders.variableDeclaration('const', [
+            builders.variableDeclarator(builders.identifier('kueServer'), builders.callExpression(
+              builders.identifier('require'),
+              [builders.literal('./kueServer')]
+            )),
+          ]));
+        }
+
+        this.traverse(path);
+      },
+
+      visitFunctionExpression(path) {
+        if (path.value.id.name === 'initialiseServer') {
+          const kueServer = path.value.body.body
+            .filter(declaration => declaration.type === 'ExpressionStatement')
+            .find(declaration => declaration.expression.callee.name === 'kueServer');
+
+          if (!kueServer) {
+            path.value.body.body.push(builders.expressionStatement(builders.callExpression(
+              builders.identifier('kueServer'),
+              [builders.identifier('app')]
+            )));
+          }
+        }
+
+        this.traverse(path);
+      },
+    });
+
+    writeFileSync('./server/index.js', recast.print(ast, { tabWidth: 2, quote: 'single' }).code);
+
 
     if (this.props.cron) {
       this.log(`const initCron = require('./cron');

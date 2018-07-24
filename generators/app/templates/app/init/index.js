@@ -1,18 +1,15 @@
 const authmakerVerifyExpress = require('authmaker-verify-express');
 const mongoose = require('mongoose');
 const mongooseConnect = require('mongoose-nconf-connect');
-const Q = require('q');
 const winston = require('winston');
 
 const models = require('../models');
-
-mongoose.Promise = Q.Promise;
 
 let initialised = false;
 
 module.exports = function initMongodb(nconf) {
   if (initialised) {
-    return Q();
+    return Promise.resolve();
   }
 
   if (!nconf.get('database:mongo')) {

@@ -20,7 +20,6 @@
     "mongoose-nconf-connect": "^2.2.0",
     "morgan": "^1.5.2",
     "nconf": "^0.9.1",
-    "q": "^1.2.0",
     "winston": "^2.0.0"
   },
   "devDependencies": {
@@ -28,5 +27,8 @@
     "eslint-config-airbnb-base": "^12.1.0",
     "eslint-plugin-import": "^2.8.0",
     "mocha": "^4.0.1"
+  },
+  "engines": {
+    "node": "8.* || >= 10.*"
   }
 }
