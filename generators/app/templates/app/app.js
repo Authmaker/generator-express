@@ -6,14 +6,12 @@ const nconf = require('nconf');
 const settings = require('./settings');
 const appRoutes = require('./server');
 
-// remove it so to add it with my settings
-winston.remove(winston.transports.Console);
-
 const winstonOptions = {
   colorize: true,
   timestamp: true,
   handleExceptions: true,
   prettyPrint: true,
+  format: winston.format.simple(),
 };
 
 if (process.env.LOG_LEVEL) {
@@ -24,7 +22,7 @@ if (process.env.LOG_LEVEL) {
   winstonOptions.level = 'info';
 }
 
-winston.add(winston.transports.Console, winstonOptions);
+winston.add(new winston.transports.Console(winstonOptions));
 
 const app = express();
 if (settings.server.useCors) {
