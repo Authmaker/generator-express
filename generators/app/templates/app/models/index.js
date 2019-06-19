@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const models = [];
+const models = {};
 
 function init(mongoose) {
   fs.readdirSync(path.join(__dirname, '..', 'models'))
@@ -9,7 +9,7 @@ function init(mongoose) {
     .forEach((file) => {
       const requireFilename = file.replace('.js', '');
 
-      // eslint-disable-next-line global-require
+      // eslint-disable-next-line global-require,import/no-dynamic-require
       const model = require(path.join('..', 'models', requireFilename));
       if (model.discriminator) {
         models[requireFilename] = model.discriminator.discriminator(model.modelName, model);
