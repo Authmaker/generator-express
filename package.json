@@ -28,7 +28,7 @@
   "dependencies": {
     "chalk": "^2.4.1",
     "lodash": "^4.17.11",
-    "mongodb": "^2.2.33",
+    "mongodb": "^3.1.13",
     "recast": "^0.16.1",
     "yeoman-assert": "^3.1.1",
     "yeoman-generator": "^2.0.3",
